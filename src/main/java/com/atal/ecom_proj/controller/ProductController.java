@@ -1,7 +1,5 @@
-package com.telusko.ecom_proj.controller;
+package com.atal.ecom_proj.controller;
 
-import com.telusko.ecom_proj.model.Product;
-import com.telusko.ecom_proj.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -9,11 +7,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.atal.ecom_proj.model.Product;
+import com.atal.ecom_proj.service.ProductService;
+
 import java.io.IOException;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/api")
 public class ProductController {
 
@@ -54,7 +55,7 @@ public class ProductController {
     public ResponseEntity<byte[]> getImageByProductId(@PathVariable int productId){
 
         Product product = service.getProductById(productId);
-        byte[] imageFile = product.getImageDate();
+        byte[] imageFile = product.getImageDate();   
 
         return ResponseEntity.ok()
                 .contentType(MediaType.valueOf(product.getImageType()))
